@@ -29,25 +29,24 @@
     </div>
   </div>
   <div fxFlex="40">
-    <h2>Comments</h2>
-    <mat-card *ngFor="let comment of comments">
-      <mat-card-header>
-        <mat-card-title>
+    <div fxFlex *ngIf="dish">
+      <h2>Comments</h2>
+
+      <mat-list *ngFor="let comment of comments">
+
+        <mat-list-item>
           <h4>{{comment.comment}}</h4>
-        </mat-card-title>
-      </mat-card-header>
+        </mat-list-item>
 
-      <mat-card-content>
-        <p>{{comment.rating}}</p>
-        <p>{{comment.author}}</p>
-        <p>{{comment.date}}</p>
-      </mat-card-content>
+        <mat-list-item>
+          <p>{{comment.rating}} Stars</p>
+        </mat-list-item>
 
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
+        <mat-list-item>
+          <p>-- {{comment.author}} on {{comment.date | date}}</p>
+        </mat-list-item>
 
-    </mat-card>
+      </mat-list>
+    </div>
   </div>
 </div>
