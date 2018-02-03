@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import {
     MatButtonModule,
@@ -11,6 +11,9 @@ import {
     MatDialogModule,
     MatInputModule,
     MatCheckboxModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
 } from '@angular/material';
 
 @NgModule({
@@ -25,6 +28,9 @@ import {
         MatDialogModule,
         MatInputModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatFormFieldModule,
     ],
     exports: [
         MatButtonModule,
@@ -37,6 +43,9 @@ import {
         MatDialogModule,
         MatInputModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatFormFieldModule,
     ]
 })
 export class MaterialModule { }
