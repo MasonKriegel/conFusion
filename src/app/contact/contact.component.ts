@@ -8,18 +8,18 @@ import { Feedback, ContactType } from '../shared/feedback';
     styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-
+    
     feedbackForm: FormGroup;
     feedback: Feedback;
     contactType = ContactType;
-
+    
     constructor( private fb: FormBuilder ) {
         this.createForm();
     }
-
+    
     ngOnInit() {
     }
-
+    
     createForm() {
         this.feedbackForm = this.fb.group({
             firstname: ['', Validators.required],
@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
             message: '',
         });
     }
-
+    
     onSubmit() {
         this.feedback = this.feedbackForm.value;
         console.log(this.feedback);
@@ -45,5 +45,5 @@ export class ContactComponent implements OnInit {
             message: '',
         });
     }
-
+    
 }
