@@ -14,6 +14,7 @@ import {
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
 } from '@angular/material';
 
 @NgModule({
@@ -31,6 +32,7 @@ import {
         MatSlideToggleModule,
         MatSelectModule,
         MatFormFieldModule,
+        MatProgressSpinnerModule,
     ],
     exports: [
         MatButtonModule,
@@ -46,6 +48,7 @@ import {
         MatSlideToggleModule,
         MatSelectModule,
         MatFormFieldModule,
+        MatProgressSpinnerModule,
     ]
 })
 export class MaterialModule { }
