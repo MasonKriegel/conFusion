@@ -10,15 +10,15 @@ import { LeaderService } from '../services/leader.service';
 })
 export class AboutComponent implements OnInit {
 
-    leaders: Leader[];
+  leaders: Leader[];
 
-    constructor(
-        private leaderService: LeaderService
-    ) { }
+  constructor(
+    private leaderService: LeaderService
+  ) { }
 
-    ngOnInit() {
-        this.leaderService.getLeaders()
-            .then(leaders => this.leaders = leaders);
-    }
+  ngOnInit() {
+    this.leaderService.getLeaders()
+      .subscribe(leaders => this.leaders = leaders);
+  }
 
 }

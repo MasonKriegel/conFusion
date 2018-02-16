@@ -26,36 +26,36 @@ import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MenuComponent,
-        DishdetailComponent,
-        HeaderComponent,
-        FooterComponent,
-        HomeComponent,
-        AboutComponent,
-        ContactComponent,
-        LoginComponent,
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpModule,
-        MaterialModule,
-        FlexLayoutModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-    ],
-    providers: [
-        DishService,
-        PromotionService,
-        LeaderService,
-    ],
-    entryComponents: [
-        LoginComponent,
-    ],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    DishdetailComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    AboutComponent,
+    ContactComponent,
+    LoginComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpModule,
+    MaterialModule,
+    FlexLayoutModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    DishService,
+    PromotionService,
+    LeaderService,
+  ],
+  entryComponents: [
+    LoginComponent,
+  ],
 
-    bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
