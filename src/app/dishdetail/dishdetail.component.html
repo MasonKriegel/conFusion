@@ -49,11 +49,41 @@
         </p>
 
       </mat-list-item>
+
     </mat-list>
+
+    <h3>Send us feedback on this dish</h3>
+
+    <form novalidate [formGroup]="dishFeedbackForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field class="full-width" dividerColor="{{formErrors.author ? 'warn' : 'primary'}}">
+          <input matInput formControlName="author" placeholder="Author" type="text" required/>
+          <mat-hint>
+            <span [hidden]="!(formErrors.author)">
+              {{formErrors.author}}
+            </span>
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-slider max="5" min="1" step="1" tick-interval="1" thumbLabel formControlName="rating">
+        </mat-slider>
+
+        <mat-input-container class="full-width" dividerColor="{{formErrors.comment ? 'warn' : 'primary'}}">
+          <textarea matInput formControlName="comment" placeholder="Your Comment" type="text" required rows="5"></textarea>
+          <mat-hint>
+            <span [hidden]="!(formErrors.comment)">
+              {{formErrors.comment}}
+            </span>
+          </mat-hint>
+        </mat-input-container>
+
+      </p>
+    </form>
+
   </div>
 
   <div [hidden]="dish">
-    <mat-progress-spinner></mat-progress-spinner>
+    <mat-spinner></mat-spinner>
     <h4>Loading . . . Please Wait</h4>
   </div>
 
