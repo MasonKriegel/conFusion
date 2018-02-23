@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { DishFeedback } from '../shared/feedback';
+import { Comment } from '../shared/comment';
 
 @Component({
   selector: 'app-dishdetail',
@@ -19,6 +20,8 @@ export class DishdetailComponent implements OnInit {
   dishIds: number[];
   prev: number;
   next: number;
+  date: string;
+  comment: Comment;
 
   dishFeedbackForm: FormGroup;
   dishFeedback: DishFeedback;
@@ -30,13 +33,11 @@ export class DishdetailComponent implements OnInit {
   validationMessages = {
     'author': {
       'required': 'Author is Required',
-      'minlength': 'Author must be at least 2 characters long',
-      'maxlength': 'Author cannot be more than 25 characters long'
+      'minlength': 'Author Name must be at least 2 characters long',
+      'maxlength': 'Author Name cannot be more than 25 characters long'
     },
     'comment': {
       'required': 'Comment is Required',
-      'minlength': 'Comment must be at least 2 characters long',
-      'maxlength': 'Comment cannot be more than 250 characters long'
     }
   };
 
@@ -63,7 +64,7 @@ export class DishdetailComponent implements OnInit {
     this.dishFeedbackForm = this.fb.group({
       author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       rating: 5,
-      comment: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(250)]],
+      comment: ['', [Validators.required]],
     });
 
     this.dishFeedbackForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -90,6 +91,18 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.dishFeedback = this.dishFeedbackForm.value;
     console.log(this.dishFeedback);
+
+    this.date = Date().toString();
+
+    this.comment = {
+      rating: this.dishFeedbackForm.value.rating,
+      comment: this.dishFeedbackForm.value.comment,
+      author: this.dishFeedbackForm.value.author,
+      date: this.date
+    }
+
+    this.dish.comments.push(this.comment);
+
     this.dishFeedbackForm.reset({
       firstname: '',
       lastname: '',

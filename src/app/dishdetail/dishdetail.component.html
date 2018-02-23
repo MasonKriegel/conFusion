@@ -50,6 +50,15 @@
 
       </mat-list-item>
 
+      <mat-list-item *ngIf="dishFeedbackForm.valid">
+        <h4 mat-line>{{dishFeedbackForm.value.comment}}</h4>
+        <p mat-line>{{dishFeedbackForm.value.rating}} Stars</p>
+        <p mat-line>
+          <span>-- {{dishFeedbackForm.value.author}}</span>
+        </p>
+
+      </mat-list-item>
+
     </mat-list>
 
     <h3>Send us feedback on this dish</h3>
@@ -57,7 +66,7 @@
     <form novalidate [formGroup]="dishFeedbackForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="full-width" dividerColor="{{formErrors.author ? 'warn' : 'primary'}}">
-          <input matInput formControlName="author" placeholder="Author" type="text" required/>
+          <input matInput formControlName="author" placeholder="Name" type="text"/>
           <mat-hint>
             <span [hidden]="!(formErrors.author)">
               {{formErrors.author}}
@@ -69,7 +78,7 @@
         </mat-slider>
 
         <mat-input-container class="full-width" dividerColor="{{formErrors.comment ? 'warn' : 'primary'}}">
-          <textarea matInput formControlName="comment" placeholder="Your Comment" type="text" required rows="5"></textarea>
+          <textarea matInput formControlName="comment" placeholder="Your Comment" type="text" rows="5"></textarea>
           <mat-hint>
             <span [hidden]="!(formErrors.comment)">
               {{formErrors.comment}}
@@ -78,6 +87,8 @@
         </mat-input-container>
 
       </p>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="dishFeedbackForm.invalid">Submit</button>
+
     </form>
 
   </div>
