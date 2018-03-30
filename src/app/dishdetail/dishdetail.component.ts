@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Params, ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,6 +22,7 @@ export class DishdetailComponent implements OnInit {
   next: number;
   date: string;
   comment: Comment;
+  errMess: string;
 
   dishFeedbackForm: FormGroup;
   dishFeedback: DishFeedback;
@@ -45,7 +46,8 @@ export class DishdetailComponent implements OnInit {
     private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL,
   ) {
     this.createForm();
   }
@@ -57,7 +59,10 @@ export class DishdetailComponent implements OnInit {
 
     this.route.params
       .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id) });
+      .subscribe(
+        dish => { this.dish = dish; this.setPrevNext(dish.id) },
+        errmess => this.errMess = <any>errmess,
+      );
   }
 
   createForm() {

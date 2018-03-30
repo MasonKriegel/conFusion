@@ -10,6 +10,7 @@ import 'hammerjs';
 
 import { MaterialModule} from './shared/material.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { baseURL } from './shared/baseurl';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -24,6 +25,7 @@ import { LoginComponent } from './login/login.component';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHttpMsgService } from './services/process-httpmsg.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { LeaderService } from './services/leader.service';
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHttpMsgService,
+    { provide: 'BaseURL', useValue: baseURL },
   ],
   entryComponents: [
     LoginComponent,
