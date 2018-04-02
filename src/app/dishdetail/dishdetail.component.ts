@@ -8,12 +8,23 @@ import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { DishFeedback } from '../shared/feedback';
 import { Comment } from '../shared/comment';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    visibility(),
+    flyInOut(),
+    expand(),
+  ],
 })
+
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
@@ -24,6 +35,7 @@ export class DishdetailComponent implements OnInit {
   date: string;
   comment: Comment;
   errMess: string;
+  visibility = 'shown';
 
   dishFeedbackForm: FormGroup;
   dishFeedback: DishFeedback;
@@ -59,12 +71,16 @@ export class DishdetailComponent implements OnInit {
       .subscribe(dishIds => this.dishIds = dishIds);
 
     this.route.params
-      .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
+      .switchMap((params: Params) => {
+        this.visibility = 'hidden';
+        return this.dishservice.getDish(+params['id']);
+      })
       .subscribe(
         dish => { 
           this.dish = dish;
           this.dishcopy = dish; 
           this.setPrevNext(dish.id);
+          this.visibility = 'shown';
         },
         errmess => this.errMess = <any>errmess,
       );
