@@ -8,12 +8,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  user = { remember: false };
+  user = { username: '', password: '', remember: false };
 
   constructor(
     private dialogRef: MatDialogRef<LoginComponent>
   ) { }
-
 
   ngOnInit() {
   }
