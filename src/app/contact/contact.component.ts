@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Feedback, ContactType } from '../shared/feedback';
+import { FeedbackService } from '../services/feedback.service';
 import { flyInOut } from '../animations/app.animation';
 
 @Component({
@@ -28,6 +29,8 @@ export class ContactComponent implements OnInit {
     'telnum': '',
     'email': ''
   };
+  showForm: boolean = true;
+  showFeedback: boolean = false;
 
   validationMessages = {
     'firstname': {
@@ -50,7 +53,10 @@ export class ContactComponent implements OnInit {
     }
   };
     
-  constructor( private fb: FormBuilder ) {
+  constructor(
+    private fb: FormBuilder,
+    private feedbackservice: FeedbackService,
+  ) {
     this.createForm();
   }
     
@@ -89,10 +95,21 @@ export class ContactComponent implements OnInit {
       }
     }
   }
+
+  showFeedbackInfo(feedback) {
+    this.feedback = feedback;
+    this.showFeedback = true;
+    setTimeout(function() {
+      this.showFeedback = false;
+      this.showForm = true;
+      debugger;
+    }, 5000);
+  }
     
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.showForm = false;
+    this.feedbackservice.submitFeedback(this.feedbackForm.value)
+      .subscribe(feedback => this.showFeedbackInfo(feedback));
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -103,5 +120,4 @@ export class ContactComponent implements OnInit {
       message: '',
     });
   }
-    
 }

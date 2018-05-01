@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { ProcessHttpMsgService } from './process-httpmsg.service';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of'
@@ -9,17 +13,21 @@ import { LEADERS } from '../shared/leaders';
 @Injectable()
 export class LeaderService {
     
-  constructor() { }
+  constructor(
+    private restangular: Restangular,
+    private processHttpMsgService: ProcessHttpMsgService,
+ ) { }
 
   getLeaders(): Observable<Leader[]> {
-    return Observable.of(LEADERS).delay(2000);
+    return this.restangular.all('leaders').getList();
   }
     
   getLeader(id: number): Observable<Leader> {
-    return Observable.of(LEADERS.filter((dish) => (dish.id === id))[0]).delay(2000);
+    return this.restangular.one('leaders', id).get();
   }
     
   getFeaturedLeader(): Observable<Leader> {
-    return Observable.of(LEADERS.filter((dish) => (dish.featured))[0]).delay(2000);
+    return this.restangular.all('leaders').getList({featured: true})
+      .map(leader => leader[0]);
   }
 }
